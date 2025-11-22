@@ -1,10 +1,10 @@
-🩺 Breast Cancer Recurrence Prediction (GP-I)
+🩺 **Breast Cancer Recurrence Prediction**
 
 AI-Based System Using MRI Breast Images
 
 ⸻
 
-📌 Overview
+📌 **Overview**
 
 This project aims to develop an AI-driven system that predicts breast cancer recurrence using MRI images.
 The system leverages Deep Learning (DL)—specifically Convolutional Neural Networks (CNNs)—to learn important imaging patterns that may indicate recurrence risks.
@@ -17,19 +17,20 @@ The system includes:
 
 ⸻
 
-🎯 Project Goal
+🎯 **Project Goal**
 
 Develop a reproducible AI-based system that predicts the recurrence of breast cancer using patient MRI data.
 
 ⸻
 
 🎯**Objectives**
- • Preprocess MRI images for model training
- • Design & build a CNN architecture
- • Train the model using TCIA dataset
- • Evaluate model performance using accuracy & loss
- • Generate Grad-CAM visualizations for explainability
- • Ensure reproducibility for future research
+
+  • Preprocess MRI images for model training
+  • Design & build a CNN architecture
+  • Train the model using TCIA dataset
+  • Evaluate model performance using accuracy
+  • Generate Grad-CAM visualizations for explainability
+  • Ensure reproducibility for future research
 
 ⸻
 
