@@ -23,7 +23,7 @@ Develop a reproducible AI-based system that predicts the recurrence of breast ca
 
 ⸻
 
-🎯 Objectives
+🎯** Objectives **
  • Preprocess MRI images for model training
  • Design & build a CNN architecture
  • Train the model using TCIA dataset
