@@ -1,39 +1,44 @@
-import { ScanLine, ShieldCheck, Clock, HeartPulse } from "lucide-react"
+"use client"
 
-const features = [
-  {
-    icon: ScanLine,
-    title: "تحليل دقيق للأشعة",
-    description: "تقنية مسح متقدمة تعتمد على الذكاء الاصطناعي لتحليل صور أشعة الثدي بدقة عالية.",
-  },
-  {
-    icon: Clock,
-    title: "نتائج سريعة",
-    description: "احصلي على نتائج التحليل خلال ثوانٍ معدودة بعد رفع الصورة مباشرة.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "خصوصية وأمان",
-    description: "بياناتك وصورك الطبية محمية بأعلى معايير الأمان والخصوصية.",
-  },
-  {
-    icon: HeartPulse,
-    title: "دعم صحي متكامل",
-    description: "تقارير تفصيلية تساعدك وطبيبك في اتخاذ القرارات الصحية المناسبة.",
-  },
-]
+import { ScanLine, ShieldCheck, Clock, HeartPulse } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export default function Features() {
+  const { t } = useLanguage()
+
+  const features = [
+    {
+      icon: ScanLine,
+      title: t("feat.1.title"),
+      description: t("feat.1.desc"),
+    },
+    {
+      icon: Clock,
+      title: t("feat.2.title"),
+      description: t("feat.2.desc"),
+    },
+    {
+      icon: ShieldCheck,
+      title: t("feat.3.title"),
+      description: t("feat.3.desc"),
+    },
+    {
+      icon: HeartPulse,
+      title: t("feat.4.title"),
+      description: t("feat.4.desc"),
+    },
+  ]
+
   return (
     <section id="features" className="py-24 bg-card">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-primary font-semibold text-sm tracking-wide">المميزات</span>
+          <span className="text-primary font-semibold text-sm tracking-wide">{t("feat.badge")}</span>
           <h2 className="mt-3 text-3xl md:text-4xl font-bold text-foreground text-balance">
-            لماذا تختارين نذيرة؟
+            {t("feat.title")}
           </h2>
           <p className="mt-4 text-foreground/60 max-w-2xl mx-auto leading-relaxed">
-            نوفر لك تجربة طبية ذكية تجمع بين الدقة والسرعة والخصوصية
+            {t("feat.subtitle")}
           </p>
         </div>
 

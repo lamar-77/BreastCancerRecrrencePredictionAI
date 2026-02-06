@@ -1,4 +1,7 @@
+import React from "react"
 import type { Metadata, Viewport } from "next"
+import { LanguageProvider } from "@/lib/language-context"
+import LayoutWrapper from "@/components/layout-wrapper"
 
 import "./globals.css"
 
@@ -19,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ar" dir="rtl">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <LanguageProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </LanguageProvider>
+      </body>
     </html>
   )
 }

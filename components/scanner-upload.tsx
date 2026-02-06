@@ -1,12 +1,16 @@
 "use client"
 
+import React from "react"
+
 import { useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Upload, X, ScanLine, ImageIcon, AlertCircle } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export default function ScannerUpload() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -60,10 +64,8 @@ export default function ScannerUpload() {
     if (!file) return
     setIsAnalyzing(true)
 
-    // Simulate AI analysis time
     await new Promise((resolve) => setTimeout(resolve, 3000))
 
-    // Generate mock results and navigate
     const mockScore = Math.random()
     const riskLevel = mockScore < 0.3 ? "low" : mockScore < 0.7 ? "medium" : "high"
     const params = new URLSearchParams({
@@ -81,13 +83,13 @@ export default function ScannerUpload() {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-secondary text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
             <ScanLine className="w-4 h-4" />
-            <span>الماسح الذكي</span>
+            <span>{t("scan.badge")}</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-foreground text-balance">
-            تحليل صورة أشعة الثدي
+            {t("scan.title")}
           </h1>
           <p className="mt-4 text-foreground/60 max-w-xl mx-auto leading-relaxed">
-            قومي برفع صورة الماموغرام وسيقوم نظامنا الذكي بتحليلها والتنبؤ باحتمالية عودة المرض
+            {t("scan.desc")}
           </p>
         </div>
 
@@ -109,7 +111,7 @@ export default function ScannerUpload() {
                   accept="image/*"
                   onChange={handleInputChange}
                   className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  aria-label="رفع صورة الأشعة"
+                  aria-label={t("scan.upload")}
                 />
                 <div className="flex flex-col items-center gap-4">
                   <div className="w-20 h-20 rounded-full bg-secondary flex items-center justify-center">
@@ -117,10 +119,10 @@ export default function ScannerUpload() {
                   </div>
                   <div>
                     <p className="text-foreground font-semibold text-lg">
-                      اسحبي الصورة هنا أو اضغطي للرفع
+                      {t("scan.dragDrop")}
                     </p>
                     <p className="text-foreground/50 text-sm mt-2">
-                      {'يدعم صيغ PNG, JPG, DICOM'}
+                      {t("scan.formats")}
                     </p>
                   </div>
                 </div>
@@ -130,7 +132,7 @@ export default function ScannerUpload() {
                 <div className="relative w-full max-w-md aspect-square rounded-2xl overflow-hidden bg-muted border border-border">
                   <Image
                     src={preview || "/placeholder.svg"}
-                    alt="صورة الأشعة المرفوعة"
+                    alt="Uploaded mammogram"
                     fill
                     className="object-contain"
                   />
@@ -138,7 +140,7 @@ export default function ScannerUpload() {
                     type="button"
                     onClick={removeFile}
                     className="absolute top-3 left-3 w-10 h-10 rounded-full bg-foreground/80 text-background flex items-center justify-center hover:bg-foreground transition-colors"
-                    aria-label="حذف الصورة"
+                    aria-label={t("scan.remove")}
                   >
                     <X className="w-5 h-5" />
                   </button>
@@ -160,7 +162,7 @@ export default function ScannerUpload() {
                 <div className="flex items-start gap-3 flex-1">
                   <AlertCircle className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                   <p className="text-foreground/60 text-xs leading-relaxed">
-                    هذا التحليل للأغراض التوعوية فقط ولا يغني عن استشارة الطبيب المختص. يرجى مراجعة طبيبك للحصول على تشخيص دقيق.
+                    {t("scan.disclaimer")}
                   </p>
                 </div>
                 <button
@@ -172,12 +174,12 @@ export default function ScannerUpload() {
                   {isAnalyzing ? (
                     <>
                       <span className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
-                      جاري التحليل...
+                      {t("scan.analyzing")}
                     </>
                   ) : (
                     <>
                       <ScanLine className="w-5 h-5" />
-                      تحليل الصورة
+                      {t("scan.analyze")}
                     </>
                   )}
                 </button>

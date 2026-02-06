@@ -3,10 +3,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Globe } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const { t, toggleLocale } = useLanguage()
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -23,19 +25,28 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-8">
           <Link href="/" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
-            الرئيسية
+            {t("nav.home")}
           </Link>
           <Link href="#how-it-works" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
-            كيف يعمل
+            {t("nav.howItWorks")}
           </Link>
           <Link href="#features" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
-            المميزات
+            {t("nav.features")}
           </Link>
+          <button
+            type="button"
+            onClick={toggleLocale}
+            className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors text-sm font-medium"
+            aria-label="Switch language"
+          >
+            <Globe className="w-4 h-4" />
+            {t("lang.switch")}
+          </button>
           <Link
             href="/scanner"
             className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
           >
-            ابدأ الفحص
+            {t("nav.startScan")}
           </Link>
         </div>
 
@@ -43,7 +54,7 @@ export default function Navbar() {
           type="button"
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-foreground"
-          aria-label="القائمة"
+          aria-label={t("nav.menu")}
         >
           {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -52,20 +63,28 @@ export default function Navbar() {
       {isOpen && (
         <div className="md:hidden bg-background border-t border-border px-6 py-4 flex flex-col gap-4">
           <Link href="/" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
-            الرئيسية
+            {t("nav.home")}
           </Link>
           <Link href="#how-it-works" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
-            كيف يعمل
+            {t("nav.howItWorks")}
           </Link>
           <Link href="#features" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
-            المميزات
+            {t("nav.features")}
           </Link>
+          <button
+            type="button"
+            onClick={() => { toggleLocale(); setIsOpen(false) }}
+            className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors font-medium"
+          >
+            <Globe className="w-4 h-4" />
+            {t("lang.switch")}
+          </button>
           <Link
             href="/scanner"
             onClick={() => setIsOpen(false)}
             className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity text-center"
           >
-            ابدأ الفحص
+            {t("nav.startScan")}
           </Link>
         </div>
       )}

@@ -1,7 +1,13 @@
+"use client"
+
 import Link from "next/link"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export default function CTASection() {
+  const { t, locale } = useLanguage()
+  const Arrow = locale === "ar" ? ArrowLeft : ArrowRight
+
   return (
     <section className="py-24 bg-primary relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
@@ -11,17 +17,17 @@ export default function CTASection() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground text-balance">
-          صحتك أولويتنا
+          {t("cta.title")}
         </h2>
         <p className="mt-6 text-primary-foreground/80 text-lg leading-relaxed max-w-2xl mx-auto">
-          لا تترددي في استخدام نذيرة للاطمئنان على صحتك. الكشف المبكر هو أفضل وسيلة للوقاية والعلاج.
+          {t("cta.desc")}
         </p>
         <Link
           href="/scanner"
           className="mt-10 inline-flex items-center gap-2 bg-primary-foreground text-primary px-10 py-4 rounded-lg font-semibold text-base hover:opacity-90 transition-opacity"
         >
-          ابدأي الفحص الآن
-          <ArrowLeft className="w-5 h-5" />
+          {t("cta.button")}
+          <Arrow className="w-5 h-5" />
         </Link>
       </div>
     </section>

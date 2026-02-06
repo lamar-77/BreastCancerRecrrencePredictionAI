@@ -1,37 +1,42 @@
-import { Upload, Cpu, FileText } from "lucide-react"
+"use client"
 
-const steps = [
-  {
-    icon: Upload,
-    number: "01",
-    title: "رفع الصورة",
-    description: "قومي برفع صورة أشعة الثدي (الماموغرام) من جهازك بسهولة وأمان.",
-  },
-  {
-    icon: Cpu,
-    number: "02",
-    title: "تحليل ذكي",
-    description: "يقوم نظام الذكاء الاصطناعي بتحليل الصورة باستخدام نماذج تعلم عميق متقدمة.",
-  },
-  {
-    icon: FileText,
-    number: "03",
-    title: "استلام النتيجة",
-    description: "تحصلين على تقرير مفصل بنتيجة التحليل ونسبة احتمالية عودة المرض.",
-  },
-]
+import { Upload, Cpu, FileText } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export default function HowItWorks() {
+  const { t } = useLanguage()
+
+  const steps = [
+    {
+      icon: Upload,
+      number: "01",
+      title: t("hiw.step1.title"),
+      description: t("hiw.step1.desc"),
+    },
+    {
+      icon: Cpu,
+      number: "02",
+      title: t("hiw.step2.title"),
+      description: t("hiw.step2.desc"),
+    },
+    {
+      icon: FileText,
+      number: "03",
+      title: t("hiw.step3.title"),
+      description: t("hiw.step3.desc"),
+    },
+  ]
+
   return (
     <section id="how-it-works" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <span className="text-primary font-semibold text-sm tracking-wide">الخطوات</span>
+          <span className="text-primary font-semibold text-sm tracking-wide">{t("hiw.badge")}</span>
           <h2 className="mt-3 text-3xl md:text-4xl font-bold text-foreground text-balance">
-            كيف يعمل نذيرة؟
+            {t("hiw.title")}
           </h2>
           <p className="mt-4 text-foreground/60 max-w-2xl mx-auto leading-relaxed">
-            ثلاث خطوات بسيطة تفصلك عن الاطمئنان
+            {t("hiw.subtitle")}
           </p>
         </div>
 
