@@ -11,7 +11,7 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-arabic)', 'sans-serif'],
+        sans: ['Tajawal', 'sans-serif'],
       },
       colors: {
         background: 'hsl(var(--background))',

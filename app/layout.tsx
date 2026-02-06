@@ -1,15 +1,6 @@
-import React from "react"
 import type { Metadata, Viewport } from "next"
-import { Tajawal } from "next/font/google"
 
 import "./globals.css"
-
-const tajawal = Tajawal({
-  subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "700", "800"],
-  variable: "--font-arabic",
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   title: "نذيرة | Nathirah - التنبؤ بعودة سرطان الثدي",
@@ -27,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={tajawal.variable}>
+    <html lang="ar" dir="rtl">
       <body className="font-sans antialiased">{children}</body>
     </html>
   )
