@@ -4,13 +4,13 @@ import { IBM_Plex_Sans_Arabic, Inter } from 'next/font/google'
 
 import './globals.css'
 
-const _ibmPlexArabic = IBM_Plex_Sans_Arabic({
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic', 'latin'],
   weight: ['300', '400', '500', '600', '700'],
   variable: '--font-arabic',
 })
 
-const _inter = Inter({
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" className={`${ibmPlexArabic.variable} ${inter.variable}`}>
       <body className="font-sans antialiased">{children}</body>
     </html>
   )
