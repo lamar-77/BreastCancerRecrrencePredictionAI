@@ -1,0 +1,68 @@
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowLeft, ShieldCheck, Brain } from "lucide-react"
+
+export default function Hero() {
+  return (
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/hero-medical.jpg"
+          alt="طبيبة في عيادة حديثة"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-background via-background/95 to-background/70" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 w-full">
+        <div className="max-w-2xl">
+          <div className="flex items-center gap-2 mb-6">
+            <span className="inline-block w-12 h-[2px] bg-primary" />
+            <span className="text-primary font-semibold text-sm tracking-wide">
+              تقنية الذكاء الاصطناعي
+            </span>
+          </div>
+
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance text-foreground">
+            اكتشفي مبكرًا،
+            <br />
+            <span className="text-primary">اطمئني دائمًا</span>
+          </h1>
+
+          <p className="mt-6 text-foreground/70 text-lg leading-relaxed max-w-lg">
+            نذيرة تستخدم أحدث تقنيات الذكاء الاصطناعي لتحليل صور أشعة الثدي والتنبؤ باحتمالية عودة المرض، لنمنحك الاطمئنان والرعاية التي تستحقينها.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-4">
+            <Link
+              href="/scanner"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-lg font-semibold text-base hover:opacity-90 transition-opacity"
+            >
+              ابدأي الفحص الآن
+              <ArrowLeft className="w-5 h-5" />
+            </Link>
+            <Link
+              href="#how-it-works"
+              className="inline-flex items-center justify-center gap-2 border-2 border-primary text-primary px-8 py-4 rounded-lg font-semibold text-base hover:bg-primary hover:text-primary-foreground transition-colors"
+            >
+              كيف يعمل؟
+            </Link>
+          </div>
+
+          <div className="mt-12 flex items-center gap-8">
+            <div className="flex items-center gap-2 text-foreground/60">
+              <ShieldCheck className="w-5 h-5 text-primary" />
+              <span className="text-sm">خصوصية تامة</span>
+            </div>
+            <div className="flex items-center gap-2 text-foreground/60">
+              <Brain className="w-5 h-5 text-primary" />
+              <span className="text-sm">ذكاء اصطناعي متقدم</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
