@@ -8,7 +8,8 @@ import { useLanguage } from "@/lib/language-context"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const { t, toggleLocale } = useLanguage()
+  const { t, toggleLocale, locale } = useLanguage()
+  const isRTL = locale === "ar"
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">

@@ -4,7 +4,8 @@ import { Upload, Cpu, FileText } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
 export default function HowItWorks() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
+  const isRTL = locale === "ar"
 
   const steps = [
     {
@@ -48,7 +49,7 @@ export default function HowItWorks() {
                   <div className="w-24 h-24 rounded-full bg-secondary flex items-center justify-center">
                     <step.icon className="w-10 h-10 text-primary" />
                   </div>
-                  <span className="absolute -top-2 -right-2 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
+                  <span className={`absolute -top-2 ${isRTL ? "-right-2" : "-left-2"} w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold`}>
                     {step.number}
                   </span>
                 </div>
@@ -57,7 +58,7 @@ export default function HowItWorks() {
               </div>
 
               {index < steps.length - 1 && (
-                <div className="hidden md:block absolute top-12 left-0 w-full h-[2px] -translate-x-1/2">
+                <div className={`hidden md:block absolute top-12 ${isRTL ? "left-0 -translate-x-1/2" : "right-0 translate-x-1/2"} w-full h-[2px]`}>
                   <div className="w-full h-full border-t-2 border-dashed border-primary/20" />
                 </div>
               )}

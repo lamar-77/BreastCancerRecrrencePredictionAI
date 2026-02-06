@@ -80,6 +80,7 @@ export default function ResultsContent() {
   })
 
   const BackArrow = locale === "ar" ? ArrowRight : ArrowLeft
+  const isRTL = locale === "ar"
 
   return (
     <section className="min-h-screen py-16 bg-background">
@@ -99,8 +100,8 @@ export default function ResultsContent() {
             <div className={`w-24 h-24 rounded-full ${config.bgColor} border-2 ${config.borderColor} flex items-center justify-center shrink-0`}>
               <RiskIcon className={`w-12 h-12 ${config.color}`} />
             </div>
-            <div className="flex-1 text-center md:text-start">
-              <div className="flex items-center justify-center md:justify-start gap-3 mb-2">
+            <div className={`flex-1 text-center ${isRTL ? "md:text-right" : "md:text-left"}`}>
+              <div className={`flex items-center justify-center ${isRTL ? "md:justify-start" : "md:justify-start"} gap-3 mb-2`}>
                 <h2 className="text-2xl font-bold text-foreground">{t("res.riskLevel")}</h2>
                 <span className={`text-2xl font-bold ${config.color}`}>{config.label}</span>
               </div>

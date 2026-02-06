@@ -10,7 +10,8 @@ import { useLanguage } from "@/lib/language-context"
 
 export default function ScannerUpload() {
   const router = useRouter()
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
+  const isRTL = locale === "ar"
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
   const [isDragging, setIsDragging] = useState(false)
@@ -139,7 +140,7 @@ export default function ScannerUpload() {
                   <button
                     type="button"
                     onClick={removeFile}
-                    className="absolute top-3 left-3 w-10 h-10 rounded-full bg-foreground/80 text-background flex items-center justify-center hover:bg-foreground transition-colors"
+                    className={`absolute top-3 ${isRTL ? "left-3" : "right-3"} w-10 h-10 rounded-full bg-foreground/80 text-background flex items-center justify-center hover:bg-foreground transition-colors`}
                     aria-label={t("scan.remove")}
                   >
                     <X className="w-5 h-5" />

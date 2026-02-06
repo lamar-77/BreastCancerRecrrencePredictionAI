@@ -4,7 +4,8 @@ import { ScanLine, ShieldCheck, Clock, HeartPulse } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
 export default function Features() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
+  const isRTL = locale === "ar"
 
   const features = [
     {

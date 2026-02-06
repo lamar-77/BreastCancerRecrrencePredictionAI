@@ -8,6 +8,7 @@ import { useLanguage } from "@/lib/language-context"
 export default function Hero() {
   const { t, locale } = useLanguage()
   const Arrow = locale === "ar" ? ArrowLeft : ArrowRight
+  const isRTL = locale === "ar"
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -19,7 +20,7 @@ export default function Hero() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-l from-background via-background/95 to-background/70" />
+        <div className={`absolute inset-0 ${isRTL ? "bg-gradient-to-l from-background via-background/95 to-background/70" : "bg-gradient-to-r from-background via-background/95 to-background/70"}`} />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-32 w-full">

@@ -9,6 +9,10 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
   useEffect(() => {
     document.documentElement.lang = locale
     document.documentElement.dir = dir
+    document.documentElement.style.fontFamily =
+      locale === "ar"
+        ? "'Tajawal', sans-serif"
+        : "'Inter', sans-serif"
   }, [locale, dir])
 
   return <>{children}</>

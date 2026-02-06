@@ -5,7 +5,8 @@ import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 
 export default function Footer() {
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
+  const isRTL = locale === "ar"
 
   return (
     <footer className="bg-primary text-primary-foreground">

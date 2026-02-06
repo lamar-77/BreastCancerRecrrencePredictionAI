@@ -7,12 +7,13 @@ import { useLanguage } from "@/lib/language-context"
 export default function CTASection() {
   const { t, locale } = useLanguage()
   const Arrow = locale === "ar" ? ArrowLeft : ArrowRight
+  const isRTL = locale === "ar"
 
   return (
     <section className="py-24 bg-primary relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 right-10 w-72 h-72 rounded-full border-2 border-primary-foreground" />
-        <div className="absolute bottom-10 left-10 w-48 h-48 rounded-full border-2 border-primary-foreground" />
+        <div className={`absolute top-10 ${isRTL ? "right-10" : "left-10"} w-72 h-72 rounded-full border-2 border-primary-foreground`} />
+        <div className={`absolute bottom-10 ${isRTL ? "left-10" : "right-10"} w-48 h-48 rounded-full border-2 border-primary-foreground`} />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
