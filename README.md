@@ -113,6 +113,28 @@ Tools
  • Canva / Figma 
 
 ⸻
+# datasets (do NOT upload)
+data/
+raw/
+processed/
+*.dcm
+*.nii
+*.nii.gz
+*.zip
+
+# python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# env
+.venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+
 
 📜 License
 
