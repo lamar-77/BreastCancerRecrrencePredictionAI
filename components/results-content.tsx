@@ -166,7 +166,7 @@ export default function ResultsContent() {
             {t("res.newScan")}
           </Link>
           <Link
-            href="/"
+            href="/home"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-primary text-primary px-8 py-3.5 rounded-lg font-semibold text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             {t("res.backHome")}

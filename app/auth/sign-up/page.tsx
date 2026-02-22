@@ -196,22 +196,12 @@ export default function SignUpPage() {
           <p className="mt-8 text-center text-sm text-muted-foreground">
             {t("auth.hasAccount")}{" "}
             <Link
-              href="/auth/login"
+              href="/"
               className="text-primary font-semibold hover:underline"
             >
               {t("auth.loginLink")}
             </Link>
           </p>
-
-          <div className="mt-6 text-center">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors text-xs font-medium"
-            >
-              {isRTL ? <ArrowRight className="w-3.5 h-3.5" /> : <ArrowLeft className="w-3.5 h-3.5" />}
-              {t("auth.backHome")}
-            </Link>
-          </div>
         </div>
       </div>
     </div>

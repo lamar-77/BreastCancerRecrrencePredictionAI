@@ -27,7 +27,7 @@ export default function Footer() {
 
           <div className="flex flex-col gap-3">
             <h3 className="font-semibold text-lg mb-2">{t("footer.links")}</h3>
-            <Link href="/" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+            <Link href="/home" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
               {t("nav.home")}
             </Link>
             <Link href="/scanner" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
