@@ -50,14 +50,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex">
       {/* Left side - decorative */}
       <div className="hidden lg:flex lg:w-1/2 relative items-center justify-center bg-primary">
-        <div className="absolute inset-0">
-          <Image
-            src="/hero-medical.jpg"
-            alt=""
-            fill
-            className="object-cover opacity-20"
-          />
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(255,255,255,0.08)_0%,_transparent_70%)]" />
         <div className="relative z-10 px-12 text-center">
           <Image
             src="/logo.jpeg"

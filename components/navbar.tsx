@@ -2,17 +2,15 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Menu, X, Globe, LogIn, UserPlus, LogOut } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
-import { useEffect, useState as useReactState } from "react"
-import type { User } from "@supabase/supabase-js"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [user, setUser] = useReactState<User | null>(null)
+  const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const { t, toggleLocale, locale } = useLanguage()
   const isRTL = locale === "ar"
   const router = useRouter()
