@@ -2,36 +2,14 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useEffect } from "react"
-import { Menu, X, Globe, LogOut } from "lucide-react"
+import { useState } from "react"
+import { Menu, X, Globe } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
-import { createClient } from "@/lib/supabase/client"
-import { useRouter } from "next/navigation"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [user, setUser] = useState<{ id: string; email?: string } | null>(null)
   const { t, toggleLocale, locale } = useLanguage()
   const isRTL = locale === "ar"
-  const router = useRouter()
-
-  useEffect(() => {
-    const supabase = createClient()
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      setUser(user)
-    })
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null)
-    })
-    return () => subscription.unsubscribe()
-  }, [])
-
-  const handleLogout = async () => {
-    const supabase = createClient()
-    await supabase.auth.signOut()
-    setUser(null)
-    router.push("/")
-  }
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -71,16 +49,6 @@ export default function Navbar() {
           >
             {t("nav.startScan")}
           </Link>
-          {user && (
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors text-sm font-medium"
-            >
-              <LogOut className="w-4 h-4" />
-              {t("auth.logout")}
-            </button>
-          )}
         </div>
 
         <button
@@ -119,16 +87,6 @@ export default function Navbar() {
           >
             {t("nav.startScan")}
           </Link>
-          {user && (
-            <button
-              type="button"
-              onClick={() => { handleLogout(); setIsOpen(false) }}
-              className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors font-medium"
-            >
-              <LogOut className="w-4 h-4" />
-              {t("auth.logout")}
-            </button>
-          )}
         </div>
       )}
     </nav>
