@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowRight, ArrowLeft, Shield } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
@@ -15,13 +16,17 @@ export default function LoginPage() {
   const { t, locale } = useLanguage()
   const isRTL = locale === "ar"
   const Arrow = isRTL ? ArrowLeft : ArrowRight
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
     setIsLoading(true)
-    // Placeholder for actual auth logic
-    setTimeout(() => setIsLoading(false), 1500)
+    // Simulate auth then navigate to the main app
+    setTimeout(() => {
+      setIsLoading(false)
+      router.push("/home")
+    }, 1000)
   }
 
   return (

@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowRight, ArrowLeft, Shield } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
@@ -18,6 +19,7 @@ export default function SignUpPage() {
   const { t, locale } = useLanguage()
   const isRTL = locale === "ar"
   const Arrow = isRTL ? ArrowLeft : ArrowRight
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -33,8 +35,11 @@ export default function SignUpPage() {
     }
 
     setIsLoading(true)
-    // Placeholder for actual auth logic
-    setTimeout(() => setIsLoading(false), 1500)
+    // Simulate account creation then navigate to sign-in
+    setTimeout(() => {
+      setIsLoading(false)
+      router.push("/")
+    }, 1000)
   }
 
   return (
