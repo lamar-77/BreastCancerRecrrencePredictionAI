@@ -50,7 +50,7 @@ export default function SignUpPage() {
         options: {
           emailRedirectTo:
             process.env.NEXT_PUBLIC_DEV_SUPABASE_REDIRECT_URL ||
-            `${window.location.origin}/scanner`,
+            `${window.location.origin}/`,
           data: {
             full_name: fullName,
           },
@@ -94,14 +94,6 @@ export default function SignUpPage() {
       {/* Right side - form */}
       <div className="flex-1 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 text-sm font-medium"
-          >
-            <Arrow className="w-4 h-4" />
-            {t("auth.backHome")}
-          </Link>
-
           {/* Mobile logo */}
           <div className="lg:hidden mb-8 flex justify-center">
             <Image

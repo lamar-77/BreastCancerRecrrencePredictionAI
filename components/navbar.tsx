@@ -3,7 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { Menu, X, Globe, LogIn, UserPlus, LogOut } from "lucide-react"
+import { Menu, X, Globe, LogOut } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import { createClient } from "@/lib/supabase/client"
 import { useRouter } from "next/navigation"
@@ -71,7 +71,7 @@ export default function Navbar() {
           >
             {t("nav.startScan")}
           </Link>
-          {user ? (
+          {user && (
             <button
               type="button"
               onClick={handleLogout}
@@ -80,23 +80,6 @@ export default function Navbar() {
               <LogOut className="w-4 h-4" />
               {t("auth.logout")}
             </button>
-          ) : (
-            <>
-              <Link
-                href="/auth/login"
-                className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors text-sm font-medium"
-              >
-                <LogIn className="w-4 h-4" />
-                {t("nav.login")}
-              </Link>
-              <Link
-                href="/auth/sign-up"
-                className="flex items-center gap-1.5 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
-              >
-                <UserPlus className="w-4 h-4" />
-                {t("nav.signUp")}
-              </Link>
-            </>
           )}
         </div>
 
@@ -136,7 +119,7 @@ export default function Navbar() {
           >
             {t("nav.startScan")}
           </Link>
-          {user ? (
+          {user && (
             <button
               type="button"
               onClick={() => { handleLogout(); setIsOpen(false) }}
@@ -145,25 +128,6 @@ export default function Navbar() {
               <LogOut className="w-4 h-4" />
               {t("auth.logout")}
             </button>
-          ) : (
-            <>
-              <Link
-                href="/auth/login"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors font-medium"
-              >
-                <LogIn className="w-4 h-4" />
-                {t("nav.login")}
-              </Link>
-              <Link
-                href="/auth/sign-up"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-1.5 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors text-center"
-              >
-                <UserPlus className="w-4 h-4" />
-                {t("nav.signUp")}
-              </Link>
-            </>
           )}
         </div>
       )}

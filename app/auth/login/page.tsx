@@ -34,7 +34,7 @@ export default function LoginPage() {
         password,
       })
       if (error) throw error
-      router.push("/scanner")
+      router.push("/")
     } catch (error: unknown) {
       setError(
         error instanceof Error
@@ -71,14 +71,6 @@ export default function LoginPage() {
       {/* Right side - form */}
       <div className="flex-1 flex items-center justify-center px-6 py-12">
         <div className="w-full max-w-md">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8 text-sm font-medium"
-          >
-            <Arrow className="w-4 h-4" />
-            {t("auth.backHome")}
-          </Link>
-
           {/* Mobile logo */}
           <div className="lg:hidden mb-8 flex justify-center">
             <Image
