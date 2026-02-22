@@ -3,13 +3,37 @@
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
-import { Menu, X, Globe } from "lucide-react"
+import { Menu, X, Globe, LogIn, UserPlus, LogOut } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { createClient } from "@/lib/supabase/client"
+import { useRouter } from "next/navigation"
+import { useEffect, useState as useReactState } from "react"
+import type { User } from "@supabase/supabase-js"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [user, setUser] = useReactState<User | null>(null)
   const { t, toggleLocale, locale } = useLanguage()
   const isRTL = locale === "ar"
+  const router = useRouter()
+
+  useEffect(() => {
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setUser(user)
+    })
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null)
+    })
+    return () => subscription.unsubscribe()
+  }, [])
+
+  const handleLogout = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    setUser(null)
+    router.push("/")
+  }
 
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
@@ -49,6 +73,33 @@ export default function Navbar() {
           >
             {t("nav.startScan")}
           </Link>
+          {user ? (
+            <button
+              type="button"
+              onClick={handleLogout}
+              className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors text-sm font-medium"
+            >
+              <LogOut className="w-4 h-4" />
+              {t("auth.logout")}
+            </button>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors text-sm font-medium"
+              >
+                <LogIn className="w-4 h-4" />
+                {t("nav.login")}
+              </Link>
+              <Link
+                href="/auth/sign-up"
+                className="flex items-center gap-1.5 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                <UserPlus className="w-4 h-4" />
+                {t("nav.signUp")}
+              </Link>
+            </>
+          )}
         </div>
 
         <button
@@ -87,6 +138,35 @@ export default function Navbar() {
           >
             {t("nav.startScan")}
           </Link>
+          {user ? (
+            <button
+              type="button"
+              onClick={() => { handleLogout(); setIsOpen(false) }}
+              className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors font-medium"
+            >
+              <LogOut className="w-4 h-4" />
+              {t("auth.logout")}
+            </button>
+          ) : (
+            <>
+              <Link
+                href="/auth/login"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-1.5 text-foreground/70 hover:text-primary transition-colors font-medium"
+              >
+                <LogIn className="w-4 h-4" />
+                {t("nav.login")}
+              </Link>
+              <Link
+                href="/auth/sign-up"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-1.5 border border-primary text-primary px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary hover:text-primary-foreground transition-colors text-center"
+              >
+                <UserPlus className="w-4 h-4" />
+                {t("nav.signUp")}
+              </Link>
+            </>
+          )}
         </div>
       )}
     </nav>
