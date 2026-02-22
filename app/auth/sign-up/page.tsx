@@ -7,10 +7,13 @@ import { useRouter } from "next/navigation"
 import { Eye, EyeOff, ArrowRight, ArrowLeft, Shield } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
-export default function LoginPage() {
+export default function SignUpPage() {
+  const [fullName, setFullName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const { t, locale } = useLanguage()
@@ -21,11 +24,21 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError("")
+
+    if (password.length < 6) {
+      setError(t("auth.passwordTooShort"))
+      return
+    }
+    if (password !== confirmPassword) {
+      setError(t("auth.passwordMismatch"))
+      return
+    }
+
     setIsLoading(true)
-    // Simulate auth then navigate to the main app
+    // Simulate account creation then navigate to sign-in
     setTimeout(() => {
       setIsLoading(false)
-      router.push("/home")
+      router.push("/")
     }, 1000)
   }
 
@@ -47,10 +60,10 @@ export default function LoginPage() {
             className="mx-auto mb-8 rounded-xl shadow-lg"
           />
           <h2 className="text-3xl font-bold text-primary-foreground mb-4 text-balance">
-            {t("auth.welcomeBack")}
+            {t("auth.joinNathirah")}
           </h2>
           <p className="text-primary-foreground/80 text-lg leading-relaxed max-w-md mx-auto">
-            {t("auth.loginSubtitle")}
+            {t("auth.signUpSubtitle")}
           </p>
           <div className="mt-10 flex items-center justify-center gap-2 text-primary-foreground/60">
             <Shield className="w-4 h-4" />
@@ -75,10 +88,10 @@ export default function LoginPage() {
 
           <div className="mb-8">
             <h1 className="text-2xl font-bold text-foreground mb-2">
-              {t("auth.loginTitle")}
+              {t("auth.signUpTitle")}
             </h1>
             <p className="text-muted-foreground text-sm">
-              {t("auth.loginDesc")}
+              {t("auth.signUpDesc")}
             </p>
           </div>
 
@@ -89,6 +102,21 @@ export default function LoginPage() {
           )}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="fullName" className="text-sm font-medium text-foreground">
+                {t("auth.fullName")}
+              </label>
+              <input
+                id="fullName"
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder={t("auth.fullNamePlaceholder")}
+                required
+                className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors text-sm"
+              />
+            </div>
+
             <div className="flex flex-col gap-2">
               <label htmlFor="email" className="text-sm font-medium text-foreground">
                 {t("auth.email")}
@@ -129,16 +157,41 @@ export default function LoginPage() {
               </div>
             </div>
 
+            <div className="flex flex-col gap-2">
+              <label htmlFor="confirmPassword" className="text-sm font-medium text-foreground">
+                {t("auth.repeatPassword")}
+              </label>
+              <div className="relative">
+                <input
+                  id="confirmPassword"
+                  type={showConfirmPassword ? "text" : "password"}
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  minLength={6}
+                  className="w-full px-4 py-3 rounded-lg border border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors text-sm"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className={`absolute top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors ${isRTL ? "left-3" : "right-3"}`}
+                  aria-label={showConfirmPassword ? t("auth.hidePassword") : t("auth.showPassword")}
+                >
+                  {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
             <button
               type="submit"
               disabled={isLoading}
               className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground py-3 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60 disabled:cursor-not-allowed mt-2"
             >
               {isLoading ? (
-                <span>{t("auth.loggingIn")}</span>
+                <span>{t("auth.creatingAccount")}</span>
               ) : (
                 <>
-                  <span>{t("auth.login")}</span>
+                  <span>{t("auth.signUp")}</span>
                   <Arrow className="w-4 h-4" />
                 </>
               )}
@@ -146,12 +199,12 @@ export default function LoginPage() {
           </form>
 
           <p className="mt-8 text-center text-sm text-muted-foreground">
-            {t("auth.noAccount")}{" "}
+            {t("auth.hasAccount")}{" "}
             <Link
-              href="/auth/sign-up"
+              href="/"
               className="text-primary font-semibold hover:underline"
             >
-              {t("auth.signUpLink")}
+              {t("auth.loginLink")}
             </Link>
           </p>
         </div>

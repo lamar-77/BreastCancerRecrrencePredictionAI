@@ -14,7 +14,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 right-0 left-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href="/home" className="flex items-center gap-3">
           <Image
             src="/logo.jpeg"
             alt="نذيرة - Nathirah"
@@ -25,7 +25,7 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link href="/" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+          <Link href="/home" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
             {t("nav.home")}
           </Link>
           <Link href="#how-it-works" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
@@ -63,7 +63,7 @@ export default function Navbar() {
 
       {isOpen && (
         <div className="md:hidden bg-background border-t border-border px-6 py-4 flex flex-col gap-4">
-          <Link href="/" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+          <Link href="/home" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
             {t("nav.home")}
           </Link>
           <Link href="#how-it-works" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
