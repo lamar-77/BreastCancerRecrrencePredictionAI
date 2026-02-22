@@ -2,13 +2,23 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { Menu, X, Globe } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { useAuth } from "@/lib/auth-context"
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
   const { t, toggleLocale, locale } = useLanguage()
+  const { isLoggedIn, signOut } = useAuth()
+
+  const handleSignOut = () => {
+    signOut()
+    setIsOpen(false)
+    router.push("/")
+  }
   const isRTL = locale === "ar"
 
   return (
@@ -28,11 +38,17 @@ export default function Navbar() {
           <Link href="/home" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
             {t("nav.home")}
           </Link>
-          <Link href="#how-it-works" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+          <Link href="/home#how-it-works" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
             {t("nav.howItWorks")}
           </Link>
-          <Link href="#features" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+          <Link href="/home#features" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
             {t("nav.features")}
+          </Link>
+          <Link href="/history" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+            {t("nav.history")}
+          </Link>
+          <Link href="/account" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+            {t("nav.account")}
           </Link>
           <button
             type="button"
@@ -43,6 +59,22 @@ export default function Navbar() {
             <Globe className="w-4 h-4" />
             {t("lang.switch")}
           </button>
+          {isLoggedIn ? (
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm"
+            >
+              {t("auth.logout")}
+            </button>
+          ) : (
+            <Link
+              href="/"
+              className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm"
+            >
+              {t("nav.login")}
+            </Link>
+          )}
           <Link
             href="/scanner"
             className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg text-sm font-semibold hover:opacity-90 transition-opacity"
@@ -66,11 +98,17 @@ export default function Navbar() {
           <Link href="/home" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
             {t("nav.home")}
           </Link>
-          <Link href="#how-it-works" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+          <Link href="/home#how-it-works" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
             {t("nav.howItWorks")}
           </Link>
-          <Link href="#features" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+          <Link href="/home#features" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
             {t("nav.features")}
+          </Link>
+          <Link href="/history" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+            {t("nav.history")}
+          </Link>
+          <Link href="/account" onClick={() => setIsOpen(false)} className="text-foreground/80 hover:text-primary transition-colors font-medium">
+            {t("nav.account")}
           </Link>
           <button
             type="button"
@@ -80,6 +118,23 @@ export default function Navbar() {
             <Globe className="w-4 h-4" />
             {t("lang.switch")}
           </button>
+          {isLoggedIn ? (
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="text-foreground/80 hover:text-primary transition-colors font-medium text-left w-full"
+            >
+              {t("auth.logout")}
+            </button>
+          ) : (
+            <Link
+              href="/"
+              onClick={() => setIsOpen(false)}
+              className="text-foreground/80 hover:text-primary transition-colors font-medium"
+            >
+              {t("nav.login")}
+            </Link>
+          )}
           <Link
             href="/scanner"
             onClick={() => setIsOpen(false)}

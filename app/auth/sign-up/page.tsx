@@ -4,8 +4,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Eye, EyeOff, ArrowRight, ArrowLeft, Shield } from "lucide-react"
+import { Eye, EyeOff, ArrowRight, ArrowLeft, Shield, Globe } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { useAuth } from "@/lib/auth-context"
 
 export default function SignUpPage() {
   const [fullName, setFullName] = useState("")
@@ -16,7 +17,8 @@ export default function SignUpPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
-  const { t, locale } = useLanguage()
+  const { t, locale, toggleLocale } = useLanguage()
+  const { signUp } = useAuth()
   const isRTL = locale === "ar"
   const Arrow = isRTL ? ArrowLeft : ArrowRight
   const router = useRouter()
@@ -35,10 +37,10 @@ export default function SignUpPage() {
     }
 
     setIsLoading(true)
-    // Simulate account creation then navigate to sign-in
     setTimeout(() => {
+      signUp(email, fullName)
       setIsLoading(false)
-      router.push("/")
+      router.push("/home")
     }, 1000)
   }
 
@@ -73,7 +75,18 @@ export default function SignUpPage() {
       </div>
 
       {/* Right / form panel */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-background">
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-background relative">
+        {/* Language toggle */}
+        <button
+          type="button"
+          onClick={toggleLocale}
+          className={`absolute top-6 flex items-center gap-2 px-4 py-2 rounded-lg border border-border bg-background text-foreground/80 hover:text-primary hover:border-primary/40 transition-colors text-sm font-medium ${isRTL ? "left-6" : "right-6"}`}
+          aria-label={t("lang.switch")}
+        >
+          <Globe className="w-4 h-4" />
+          {t("lang.switch")}
+        </button>
+
         <div className="w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden flex justify-center mb-8">

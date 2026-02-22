@@ -23,7 +23,9 @@ export default function ResultsContent() {
   const searchParams = useSearchParams()
   const { t, locale } = useLanguage()
 
-  const risk = (searchParams.get("risk") as RiskLevel) || "low"
+  const rawRisk = searchParams.get("risk")
+  const risk: RiskLevel =
+    rawRisk === "low" || rawRisk === "medium" || rawRisk === "high" ? rawRisk : "low"
   const score = searchParams.get("score") || "0"
   const dateStr = searchParams.get("date") || new Date().toISOString()
 

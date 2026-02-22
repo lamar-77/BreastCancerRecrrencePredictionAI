@@ -1,6 +1,7 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
 import { LanguageProvider } from "@/lib/language-context"
+import { AuthProvider } from "@/lib/auth-context"
 import LayoutWrapper from "@/components/layout-wrapper"
 
 import "./globals.css"
@@ -24,7 +25,9 @@ export default function RootLayout({
     <html lang="ar" dir="rtl">
       <body className="font-sans antialiased">
         <LanguageProvider>
-          <LayoutWrapper>{children}</LayoutWrapper>
+          <AuthProvider>
+            <LayoutWrapper>{children}</LayoutWrapper>
+          </AuthProvider>
         </LanguageProvider>
       </body>
     </html>

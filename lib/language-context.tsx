@@ -1,8 +1,20 @@
 "use client"
 
-import { createContext, useContext, useState, useCallback, type ReactNode } from "react"
+import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react"
+
+const LOCALE_STORAGE_KEY = "nathirah-locale"
 
 type Locale = "ar" | "en"
+
+function getInitialLocale(): Locale {
+  if (typeof window === "undefined") return "ar"
+  const saved = localStorage.getItem(LOCALE_STORAGE_KEY) as Locale | null
+  if (saved === "ar" || saved === "en") return saved
+  const browserLang = navigator.language?.toLowerCase()
+  if (browserLang?.startsWith("ar")) return "ar"
+  if (browserLang?.startsWith("en")) return "en"
+  return "ar"
+}
 
 interface LanguageContextType {
   locale: Locale
@@ -138,6 +150,27 @@ const translations: Record<Locale, Record<string, string>> = {
     "auth.logout": "تسجيل الخروج",
     "nav.login": "تسجيل الدخول",
     "nav.signUp": "إنشاء حساب",
+    "nav.history": "سجل الفحوصات",
+    "nav.account": "حسابي",
+
+    // History
+    "history.badge": "سجل الفحوصات",
+    "history.title": "سجل صور الأشعة",
+    "history.subtitle": "عرض جميع الفحوصات السابقة لمقارنة النتائج مع طبيبك",
+    "history.empty": "لا توجد فحوصات بعد",
+    "history.emptyDesc": "ستظهر فحوصاتك هنا بعد إجراء أول تحليل",
+    "history.viewDetails": "عرض التفاصيل",
+    "history.compare": "مقارنة النتائج",
+    "history.newScan": "فحص جديد",
+
+    // Account
+    "account.badge": "حسابي",
+    "account.title": "معلومات الحساب",
+    "account.subtitle": "عرض وتحديث معلوماتك الشخصية",
+    "account.name": "الاسم",
+    "account.email": "البريد الإلكتروني",
+    "account.signOut": "تسجيل الخروج",
+    "account.signInRequired": "يرجى تسجيل الدخول لعرض حسابك",
 
     // Language
     "lang.switch": "English",
@@ -268,6 +301,27 @@ const translations: Record<Locale, Record<string, string>> = {
     "auth.logout": "Sign Out",
     "nav.login": "Sign In",
     "nav.signUp": "Sign Up",
+    "nav.history": "Scan History",
+    "nav.account": "My Account",
+
+    // History
+    "history.badge": "Scan History",
+    "history.title": "Your Scan History",
+    "history.subtitle": "View all past scans to compare results with your doctor",
+    "history.empty": "No scans yet",
+    "history.emptyDesc": "Your scans will appear here after your first analysis",
+    "history.viewDetails": "View Details",
+    "history.compare": "Compare Results",
+    "history.newScan": "New Scan",
+
+    // Account
+    "account.badge": "My Account",
+    "account.title": "Account Information",
+    "account.subtitle": "View and manage your personal information",
+    "account.name": "Name",
+    "account.email": "Email",
+    "account.signOut": "Sign Out",
+    "account.signInRequired": "Please sign in to view your account",
 
     // Language
     "lang.switch": "العربية",
@@ -278,6 +332,18 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [locale, setLocale] = useState<Locale>("ar")
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setLocale(getInitialLocale())
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (mounted && typeof window !== "undefined") {
+      localStorage.setItem(LOCALE_STORAGE_KEY, locale)
+    }
+  }, [locale, mounted])
 
   const toggleLocale = useCallback(() => {
     setLocale((prev) => (prev === "ar" ? "en" : "ar"))

@@ -33,11 +33,17 @@ export default function Footer() {
             <Link href="/scanner" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
               {t("footer.scanner")}
             </Link>
-            <Link href="#how-it-works" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+            <Link href="/home#how-it-works" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
               {t("nav.howItWorks")}
             </Link>
-            <Link href="#features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+            <Link href="/home#features" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
               {t("nav.features")}
+            </Link>
+            <Link href="/history" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+              {t("nav.history")}
+            </Link>
+            <Link href="/account" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+              {t("nav.account")}
             </Link>
           </div>
 

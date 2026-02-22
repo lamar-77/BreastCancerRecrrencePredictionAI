@@ -7,10 +7,13 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Upload, X, ScanLine, ImageIcon, AlertCircle } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { useAuth } from "@/lib/auth-context"
+import { saveScan } from "@/lib/scan-history"
 
 export default function ScannerUpload() {
   const router = useRouter()
   const { t, locale } = useLanguage()
+  const { user } = useAuth()
   const isRTL = locale === "ar"
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
@@ -62,21 +65,33 @@ export default function ScannerUpload() {
   }, [])
 
   const handleAnalyze = useCallback(async () => {
-    if (!file) return
+    if (!file || !preview) return
     setIsAnalyzing(true)
 
     await new Promise((resolve) => setTimeout(resolve, 3000))
 
     const mockScore = Math.random()
     const riskLevel = mockScore < 0.3 ? "low" : mockScore < 0.7 ? "medium" : "high"
+    const scoreStr = (mockScore * 100).toFixed(1)
+    const dateStr = new Date().toISOString()
+
+    saveScan({
+      date: dateStr,
+      risk: riskLevel,
+      score: scoreStr,
+      imageData: preview,
+      fileName: file.name,
+      userId: user?.email,
+    })
+
     const params = new URLSearchParams({
       risk: riskLevel,
-      score: (mockScore * 100).toFixed(1),
-      date: new Date().toISOString(),
+      score: scoreStr,
+      date: dateStr,
     })
 
     router.push(`/results?${params.toString()}`)
-  }, [file, router])
+  }, [file, preview, router, user?.email])
 
   return (
     <section className="min-h-screen py-16 bg-background">
