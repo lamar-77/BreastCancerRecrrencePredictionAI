@@ -1,39 +1,70 @@
-Dataset Description
-The dataset used in this project is obtained from The Cancer Imaging Archive (TCIA), a publicly available and widely used repository for medical imaging research.
-For this project, we use a Breast MRI dataset that contains real MRI scans of breast cancer patients.
+📁 Dataset Description
 
-1. Type of Data
- • Breast MRI images (2D slices or 3D volumes depending on the collection).
- • Images are provided in DICOM or NIfTI format.
- • Each scan belongs to a real patient but is fully anonymized.
+The dataset used in this project is obtained from The Cancer Imaging Archive (TCIA) — a publicly available and widely recognized repository for medical imaging research.
 
-2. Labels
- • Each MRI image is associated with a recurrence label:
- • 0 → No recurrence
- • 1 → Recurrence
- • Label information is taken from the dataset’s metadata file provided by TCIA.
+For this project, we utilize a breast MRI dataset that contains real MRI scans of breast cancer patients.
 
-3. Dataset Components
- • MRI images.
- • Metadata file containing:
+⸻
+
+1️⃣ Type of Data
+
+• Breast MRI scans
+• Provided as 2D slices or 3D volumes depending on the collection
+• Images are stored in medical imaging formats such as DICOM 
+• Each scan corresponds to a real patient but is fully anonymized
+
+⸻
+
+2️⃣ Labels
+
+Each patient scan is associated with a recurrence label:
+
+• 0 → No recurrence
+• 1 → Recurrence
+
+Label information is extracted from the metadata file provided with the dataset.
+
+⸻
+
+3️⃣ Dataset Components
+
+The dataset consists of:
+
+• Raw MRI images
+• A metadata file containing:
  • Patient ID
- • Recurrence information (0/1)
- • Basic clinical notes if available (not used in our project)
+ • Recurrence label
+ • Additional clinical notes (not used in this project)
 
-4. Why We Use This Dataset
- • It is public, ethically safe, and does not require hospital approval.
- • It contains real MRI scans, making the model more realistic.
- • It is commonly used in research, which improves reliability and reproducibility.
+⸻
 
-5. How It Is Used in Our Project
+4️⃣ Why This Dataset Was Selected
 
-We use this dataset to:
- • Preprocess MRI images (resize, cleaning, normalization)
- • Build the training, validation, and testing splits
- • Train the CNN to detect recurrence patterns
- • Evaluate model accuracy
+This dataset was chosen because:
 
-6. Ethical & Privacy Considerations
- • All images are anonymized by TCIA.
- • No personal patient identifiers are included.
- • The project uses only open-source data—no private hospital records.
+• It is publicly available and ethically safe
+• It contains real clinical MRI scans
+• It is widely used in academic research
+• It supports reproducibility of results
+• It does not require institutional approval
+
+⸻
+
+5️⃣ Usage in This Project
+
+In this project, the dataset is used to:
+
+• Preprocess MRI images (cleaning, normalization, resizing)
+• Convert medical image formats into model-ready inputs
+• Create training, validation, and testing splits
+• Train a CNN to learn recurrence-related patterns
+• Evaluate model performance
+
+⸻
+
+6️⃣ Ethical & Privacy Considerations
+
+• All images are anonymized by TCIA
+• No personal identifiers are included
+• No private hospital data is used
+• The project complies with ethical research standards

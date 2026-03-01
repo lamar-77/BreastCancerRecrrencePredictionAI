@@ -1,0 +1,12 @@
+# Ignore dataset folders
+data/
+raw/
+data_processedNew/
+*.dcm
+*.png
+*.nii
+*.nrrd
+
+# Ignore system files
+.DS_Store
+Thumbs.db

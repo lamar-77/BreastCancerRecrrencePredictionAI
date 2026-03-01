@@ -1,133 +1,164 @@
-🩺 **Breast Cancer Recurrence Prediction**
+🩺 Breast Cancer Recurrence Prediction
 
-AI-Based System Using MRI Breast Images
-
-⸻
-
-📌 **Overview**
-
-This project aims to develop an AI-driven system that predicts breast cancer recurrence using MRI images.
-The system leverages Deep Learning (DL)—specifically Convolutional Neural Networks (CNNs)—to learn important imaging patterns that may indicate recurrence risks.
-The system includes:
- • Data preprocessing (resizing, normalization, augmentation)
- • Model training using GPU
- • Performance evaluation (accuracy & loss)
- • Visualization tools such as Grad-CAM heatmaps
- • A prediction pipeline for future inference
+AI-Based System Using Breast MRI Images
 
 ⸻
 
-🎯 **Project Goal**
+📌 Overview
 
-Develop a reproducible AI-based system that predicts the recurrence of breast cancer using patient MRI data.
+This project aims to develop an AI-driven system that predicts breast cancer recurrence using breast MRI scans.
+The system leverages Deep Learning (DL)—specifically Convolutional Neural Networks (CNNs)—to learn meaningful imaging patterns that may indicate recurrence risk.
+
+The proposed pipeline includes:
+
+• MRI data preprocessing
+• CNN model training using GPU acceleration
+• Model performance evaluation (accuracy & loss)
+• Explainability using Grad-CAM heatmaps
+• A prediction pipeline for future inference
 
 ⸻
 
-🎯**Objectives**
+🎯 Project Goal
 
-  • Preprocess MRI images for model training
-  • Design & build a CNN architecture
-  • Train the model using TCIA dataset
-  • Evaluate model performance using accuracy
-  • Generate Grad-CAM visualizations for explainability
-  • Ensure reproducibility for future research
+To develop a reproducible AI-based system capable of predicting breast cancer recurrence from patient MRI data.
+
+⸻
+
+🎯 Objectives
+
+• Preprocess MRI images for deep learning
+• Design and implement a CNN architecture
+• Train the model using TCIA dataset
+• Evaluate model performance using standard metrics
+• Generate Grad-CAM visualizations for explainability
+• Ensure reproducibility for future research
 
 ⸻
 
 📁 Dataset Description (TCIA)
 
-The project uses The Cancer Imaging Archive (TCIA) — a publicly available medical imaging repository containing real MRI scans of breast cancer patients.
+The project uses data from The Cancer Imaging Archive (TCIA) — a publicly available medical imaging repository containing anonymized clinical MRI scans.
 
-🔍 Key characteristics:
- • Breast MRI scans
- • Real patient imaging data (de-identified)
- • High-quality radiology images
- • Open-source and ethically compliant
- • Suitable for deep learning & research use
+🔍 Key Characteristics
+
+• Breast MRI scans
+• Real patient imaging data (de-identified)
+• High-resolution radiology images
+• Open-source and research-compliant
+• Suitable for deep learning applications
 
 ⸻
 
-🧩 System Architecture 
+🧩 System Architecture
 
-Our pipeline follows these main components:
+The system pipeline consists of the following components:
 
 1️⃣ Data Repository
 
-Loads raw MRI images and labels, organizes them, and prepares them for preprocessing.
+Loads raw MRI images and corresponding labels, organizes them, and prepares them for preprocessing.
+
+⸻
 
 2️⃣ Preprocessor
 
-Handles:
- • Resizing
+Handles MRI data preparation, including:
+
+• DICOM reading
+• Slice extraction
+• Normalization
+• Conversion to PNG format
+• Resizing to CNN input size
+
+⸻
 
 3️⃣ MRIDataset
 
-Stores processed MRI records and provides iterable access for training.
+Stores processed MRI samples and provides iterable access during training.
+
+⸻
 
 4️⃣ CNN Model
 
-Defines the deep learning model used for recurrence prediction.
+Defines the deep learning architecture used for recurrence prediction.
+
+⸻
 
 5️⃣ Trainer
 
-Handles model training using:
- • Training set
- • Validation set
- • Test set
+Manages model training using:
+
+• Training dataset
+• Validation dataset
+• Test dataset
+
+⸻
 
 6️⃣ Evaluator
 
-Computes model accuracy.
+Computes performance metrics such as accuracy and loss.
+
+⸻
 
 7️⃣ Visualizer
 
-Creates:
- • Grad-CAM heatmaps
+Generates explainability outputs including:
+
+• Grad-CAM heatmaps
+
+⸻
 
 8️⃣ Prediction Service
 
-Loads a trained model and predicts recurrence for a new MRI image.
+Loads a trained model and predicts recurrence for unseen MRI images.
 
 ⸻
 
 🛠️ Technologies Used
 
 Programming
- • Python 3.8+
+
+• Python 3.8+
 
 Deep Learning
- • PyTorch or TensorFlow/Keras
+
+• PyTorch or TensorFlow/Keras
 
 Data Processing
- • NumPy
- • OpenCV / PIL
+
+• NumPy
+• OpenCV / PIL
+• PyDICOM
 
 Visualization
- • Matplotlib
- • Grad-CAM libraries
 
-Tools
- • Google Colab (GPU)
- • GitHub 
- • Draw.io / Mermaid 
- • Canva / Figma 
+• Matplotlib
+• Grad-CAM tools
+
+Development Tools
+
+• Google Colab (GPU)
+• GitHub
+• Draw.io / Mermaid
+• Canva / Figma
 
 ⸻
 
 📜 License
 
-For academic and research purposes only.
+This project is intended for academic and research purposes only.
 
 ⸻
 
 👩‍💻 Contributors
 
-Princess Nourah University – Computer Science Department
- • Lamar Almutairi
- • Layan Alrouji
- • Lama Alammar
- • Aisha Gammash
+Princess Nourah University — Computer Science Department
 
- Supervised By
-Dr.Hanan Adlan
+• Lamar Almutairi
+• Layan Alrouji
+• Lama Alammar
+• Aisha Gammash
 
+🎓 Supervised By
+
+Dr. Hanan Adlan
